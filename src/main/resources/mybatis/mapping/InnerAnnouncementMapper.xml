@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ml.dao.mapper.InnerAnnouncementMapper">
+
+	<resultMap 
+		type="InnerAnnouncement" 
+		id="innerAnnouncementResult">
+		<id property="id" column="inner_announcement_id" />
+		<result property="title" column="inner_announcement_title" />
+		<result property="summary" column="inner_announcement_summary" />
+		<result property="content" column="inner_announcement_content" />
+		<result property="createTime" column="inner_announcement_create_time" />
+		<result property="updateTime" column="inner_announcement_update_time" />
+		<result property="createdByCode" column="inner_announcement_created_by_code" />
+		<result property="createdByName" column="inner_announcement_created_by_name" />
+		<result property="updatedByCode" column="inner_announcement_updated_by_code" />
+		<result property="updatedByName" column="inner_announcement_updated_by_name" />
+	
+		<result property="startTime" column="inner_announcement_start_time" />
+		<result property="endTime" column="inner_announcement_end_time" />
+		<result property="hidden" column="inner_announcement_is_hidden" />
+				
+	</resultMap>
+	
+	<sql id="innerAnnouncementColumns">
+		cia.id AS inner_announcement_id,
+		cia.title AS inner_announcement_title,
+		cia.summary AS inner_announcement_summary,
+		cia.content AS inner_announcement_content,
+		cia.create_time AS inner_announcement_create_time,
+		cia.update_time AS inner_announcement_update_time,
+		cia.created_by_code AS inner_announcement_created_by_code,
+		cia.created_by_name AS inner_announcement_created_by_name,
+		cia.updated_by_code AS inner_announcement_updated_by_code,
+		cia.updated_by_name AS inner_announcement_updated_by_name,
+		cia.start_time AS inner_announcement_start_time,
+		cia.end_time AS inner_announcement_end_time,
+		cia.is_hidden AS inner_announcement_is_hidden
+	</sql>
+
+	<insert 
+		id="insertInnerAnnouncement" 
+		parameterType="InnerAnnouncement" 
+		useGeneratedKeys="true" 
+		keyProperty="id" >
+		INSERT INTO t_inner_announcement (
+			id,
+			title,
+			summary,
+			content,
+			create_time,
+			update_time,
+			created_by_code,
+			created_by_name,
+			updated_by_code,
+			updated_by_name,
+			start_time,
+			end_time,
+			is_hidden
+		) VALUES (
+			#{id, javaType=int, jdbcType=INTEGER},
+			#{title, javaType=string, jdbcType=CHAR},
+			#{summary, javaType=string, jdbcType=CHAR},
+			#{content, javaType=string, jdbcType=CHAR},
+			#{createTime, javaType=date, jdbcType=TIMESTAMP},
+			#{updateTime, javaType=date, jdbcType=TIMESTAMP},
+			#{createdByCode, javaType=string, jdbcType=CHAR},
+			#{createdByName, javaType=string, jdbcType=CHAR},
+			#{updatedByCode, javaType=string, jdbcType=CHAR},
+			#{updatedByName, javaType=string, jdbcType=CHAR},
+			#{startTime, javaType=date, jdbcType=TIMESTAMP},
+			#{endTime, javaType=date, jdbcType=TIMESTAMP},
+			'N'
+		)
+	</insert>
+	
+	<update 
+		id="updateInnerAnnouncement"
+		parameterType="InnerAnnouncement">
+		UPDATE
+			t_inner_announcement
+		<set>
+			<if test="title != null">
+				title = #{title, javaType=String, jdbcType=CHAR},
+			</if>
+			<if test="summary != null">
+				summary = #{summary, javaType=string, jdbcType=CHAR},
+			</if>
+			<if test="content != null">
+				content = #{content, javaType=string, jdbcType=CHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime, javaType=date, jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedByCode != null">
+				updated_by_code = #{updatedByCode, javaType=string, jdbcType=CHAR},
+			</if>
+			<if test="updatedByName != null">
+				updated_by_name = #{updatedByName, javaType=string, jdbcType=CHAR},
+			</if>
+			<if test="startTime != null">
+				start_time = #{startTime, javaType=date, jdbcType=TIMESTAMP},
+			</if>
+				end_time = #{endTime, javaType=date, jdbcType=TIMESTAMP}
+	    </set>
+	    WHERE
+	    	id = #{id ,javaType=int, jdbcType=CHAR}
+	</update>
+	
+	<select 
+		id="selectInnerAnnouncementById"
+		parameterType="map"
+		resultMap="innerAnnouncementResult">		
+		SELECT
+			<include refid="innerAnnouncementColumns"/>
+		FROM
+			t_inner_announcement cia
+			INNER JOIN t_inner_announcement_location cial ON cial.announcement_id = cia.id
+  		WHERE
+  			cia.id = #{id, javaType=int, jdbcType=INTEGER}  						
+	</select>
+	
+</mapper>

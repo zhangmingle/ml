@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+   
+    <context:annotation-config />        
+    
+    <!-- 扫描service组件 -->
+	<context:component-scan base-package="com.ml" />
+	
+<!--     分解配置 jdbc.properites  
+    <context:property-placeholder location="classpath:config.properties" />   -->
+    <bean 
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:config.properties</value>
+			</list>
+		</property>
+	</bean> 
+    <!-- 数据源c3p0 -->  
+     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">  
+        <property name="driverClass" value="${database.driver.class}" />  
+        <property name="jdbcUrl" value="${database.jdbc.url}" />  
+        <property name="user" value="${database.user}" />  
+        <property name="password" value="${database.password}" />  
+        <property name="maxPoolSize" value="${database.max.pool.size}" />  
+        <property name="minPoolSize" value="${database.min.pool.size}" />  
+        <property name="initialPoolSize" value="${database.initial.pool.size}" />  
+        <property name="acquireIncrement" value="${database.acquire.increment}" />  
+    </bean>
+
+	<!-- sessionFactory 将spring和mybatis整合 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />  
+        <property name="mapperLocations" value="classpath*:mybatis/mapping/**/*.xml" />  
+    </bean>  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="com.ml.dao.mapper" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
+    </bean>  
+	
+	<!-- activeMQ  -->
+	
+    <!-- 配置JMS连接工厂 -->  
+    <bean id="connectionFactory"  
+        class="org.apache.activemq.ActiveMQConnectionFactory">  
+        <property name="brokerURL" value="tcp://localhost:61616" />  
+    </bean>  
+    <!-- 发送消息的目的地（队列） -->  
+    <bean id="queueDest"  
+        class="org.apache.activemq.command.ActiveMQQueue">  
+        <!-- 设置消息队列的名字 -->  
+        <constructor-arg index="0" value="myQueue" />  
+    </bean>  
+    <!-- 配置Jms模板  -->  
+    <bean id="jmsQueueTemplate"  
+        class="org.springframework.jms.core.JmsTemplate">  
+        <property name="connectionFactory" ref="connectionFactory" />  
+        <property name="defaultDestination" ref="queueDest" />  
+        <!--<property name="receiveTimeout" value="10000" />  -->  
+    </bean>  
+      
+    <!-- 发送消息的目的地（主题） -->  
+    <bean id="topicDest"  
+        class="org.apache.activemq.command.ActiveMQTopic">  
+        <!-- 设置消息队列的名字 -->  
+        <constructor-arg index="0" value="myTopic" />  
+    </bean>  
+    <!-- 配置TopicJms模板  -->  
+    <bean id="jmsTopicTemplate"  
+        class="org.springframework.jms.core.JmsTemplate">  
+        <property name="connectionFactory" ref="connectionFactory" />  
+        <property name="defaultDestination" ref="topicDest" />  
+        <!-- 配置是否为发布订阅者模式，默认为false -->  
+        <property name="pubSubDomain" value="true"/>  
+    <!--<property name="receiveTimeout" value="10000" />  -->  
+    </bean>  
+	
+	<bean id="queueConsumerService" class="com.ml.test.jms.QueueConsumerService">
+		<property name="jmsTemplate" ref="jmsQueueTemplate"></property>
+		<property name="destination" ref="queueDest"></property>
+	</bean>
+	
+	<bean id="queueProducerService" class="com.ml.test.jms.QueueProducerService">
+		<property name="jmsTemplate" ref="jmsQueueTemplate"></property>
+		<property name="destination" ref="queueConsumerMessageListenerDest"></property>
+		
+		<!-- <property name="destination" ref="queueDest"></property> -->
+	</bean>
+	
+	<!-- 实现接口的方式 -->  
+	<bean id="queueConsumerMessageListener" class="com.ml.test.jms.QueueConsumerMessageListener">
+	</bean>
+    <!-- 新增一个队列地址名字不能跟上面的重复 -->  
+    <bean id="queueConsumerMessageListenerDest" class="org.apache.activemq.command.ActiveMQQueue">  
+        <constructor-arg index="0" value="myMessageListenerQueue" />  
+    </bean>  
+    <bean id="myMsgQueuelistenerContainer"  
+        class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+        <property name="connectionFactory" ref="connectionFactory" />  
+        <property name="destination" ref="queueConsumerMessageListenerDest" />  
+        <property name="messageListener" ref="queueConsumerMessageListener" />  
+        <property name="receiveTimeout" value="10000" />  
+    </bean>  
+	
+</beans>
