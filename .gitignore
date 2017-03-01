@@ -1,0 +1,14 @@
+.jshintrc
+target
+.classpath
+.project
+.settings
+*.iml
+.idea
+.mymetadata
+.metadata
+RemoteSystemsTempFiles
+logs
+PLTLOG
+activemq-data
+activemq
