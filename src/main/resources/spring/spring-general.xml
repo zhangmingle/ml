@@ -114,5 +114,5 @@
         <property name="messageListener" ref="queueConsumerMessageListener" />  
         <property name="receiveTimeout" value="10000" />  
     </bean>  
-	
+
 </beans>

@@ -1,11 +1,10 @@
 package com.ml.dao;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ml.dao.mapper.InnerAnnouncementMapper;
@@ -32,6 +31,10 @@ public class InnerAnnouncementMapperTest extends AbstractPersistenceTest {
 		ia.setCreateTime(now);
 		ia.setStartTime(now);
 		ia.setUpdateTime(now);
+
+		Class<?>[] classes = mapper.getClass().getInterfaces();
+		System.out.println(classes[0]);
+		
 		mapper.insertInnerAnnouncement(ia);
 	}
 

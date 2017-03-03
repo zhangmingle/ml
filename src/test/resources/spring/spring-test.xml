@@ -18,7 +18,11 @@
 			</list>
 		</property>
 	</bean> 
-	
+
+    <bean id="testBean" class="com.ml.pojo.innerannouncement.TestBean" init-method="myInit"
+        destroy-method="myDestory" scope="singleton">
+    </bean>    
+
 	<bean 
 		id="dataSource" 
 		class="com.mchange.v2.c3p0.ComboPooledDataSource">
