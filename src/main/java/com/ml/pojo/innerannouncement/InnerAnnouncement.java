@@ -1,10 +1,9 @@
 package com.ml.pojo.innerannouncement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import java.util.List;
 
 public class InnerAnnouncement implements Serializable {
 	
