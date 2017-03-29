@@ -3,17 +3,28 @@ package com.ml.pojo.innerannouncement;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
+import com.ml.pojo.innerannouncement.TestString.innerClass1;
+
 public class TestStatic {
+	
+	
 
-
+	static int b = 12;
+	Integer a = new Integer(1);
+	
 	public static void main(String[] args) {
 		TestStatic.function();
+		
+		TestString.innerClass.staticPrint();
+		TestString.innerClass1 innerClass1 = new TestString().new innerClass1();
+		innerClass1.staticPrint1();
 	}
-
+	static TestStatic my = new TestStatic();
+	
 	static {
 		System.out.println("2");
 	}
-	static TestStatic my = new TestStatic();
+
 	{
 		System.out.println("1");
 	}
@@ -27,7 +38,5 @@ public class TestStatic {
 		System.out.println("4");
 	}
 
-	static int b = 12;
-	Integer a = new Integer(1);
 
 }

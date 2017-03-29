@@ -1,9 +1,10 @@
 package com.ml.pojo.innerannouncement;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class InnerAnnouncement implements Serializable {
 	
@@ -141,17 +142,17 @@ public class InnerAnnouncement implements Serializable {
 	
 	    public static void main(String[] args) {
 
-/*        System.out.println("现在开始初始化容器");
+        System.out.println("现在开始初始化容器");
         
         ApplicationContext factory = new ClassPathXmlApplicationContext("spring/spring-general.xml");
         System.out.println("容器初始化成功");    
-        //得到Preson，并使用
+
         TestBean person = factory.getBean("testBean",TestBean.class);
         System.out.println(person);
         
         System.out.println("现在开始关闭容器！");
-        ((ClassPathXmlApplicationContext)factory).registerShutdownHook();*/
-	     TestStatic myBeanPostProcessor = new TestStatic();
+        ((ClassPathXmlApplicationContext)factory).registerShutdownHook();
+/*	     TestStatic myBeanPostProcessor = new TestStatic();
 		 List<String> a = new ArrayList<String>();
 		a.add("1");
 		a.add("2");
@@ -160,7 +161,7 @@ public class InnerAnnouncement implements Serializable {
 		a.add("5");
 		System.out.println(a);
 		a.add(a.remove(a.indexOf("4")));
-		System.out.println(a);
+		System.out.println(a);*/
 	}
 	
 	    
