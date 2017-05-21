@@ -1,11 +1,13 @@
-package com.ml.pojo.innerannouncement;
+package com.ml.test;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
+import com.ml.pojo.innerannouncement.TestString;
+import com.ml.pojo.innerannouncement.TestString.innerClass;
 import com.ml.pojo.innerannouncement.TestString.innerClass1;
 
-public class TestStatic {
+public class TestStatic extends ParentTestStatic {
 	
 	
 

@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ml.dao.mapper.InnerAnnouncementMapper;
-import com.ml.pojo.innerannouncement.InnerAnnouncement;
+import com.ml.test.InnerAnnouncement;
 
 public class InnerAnnouncementMapperTest extends AbstractPersistenceTest {
 

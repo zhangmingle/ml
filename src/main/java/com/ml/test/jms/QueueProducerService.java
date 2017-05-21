@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
-import com.ml.pojo.innerannouncement.InnerAnnouncement;
+import com.ml.test.InnerAnnouncement;
 
 public class QueueProducerService {
 

@@ -1,4 +1,4 @@
-package com.ml.pojo.innerannouncement;
+package com.ml.test;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;

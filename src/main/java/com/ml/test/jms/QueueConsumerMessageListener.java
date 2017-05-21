@@ -6,7 +6,7 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
 
-import com.ml.pojo.innerannouncement.InnerAnnouncement;
+import com.ml.test.InnerAnnouncement;
 
 public class QueueConsumerMessageListener implements MessageListener {
 

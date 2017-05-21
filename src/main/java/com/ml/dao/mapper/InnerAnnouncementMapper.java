@@ -2,7 +2,7 @@ package com.ml.dao.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ml.pojo.innerannouncement.InnerAnnouncement;
+import com.ml.test.InnerAnnouncement;
 
 public interface InnerAnnouncementMapper {
 	

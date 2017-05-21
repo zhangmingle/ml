@@ -1,4 +1,4 @@
-package com.ml.pojo.innerannouncement;
+package com.ml.test;
 
 import java.util.Collections;
 
