@@ -1,18 +1,27 @@
 package com.ml.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ml.pojo.innerannouncement.Items;
+import com.ml.handler.ItemHandler;
+import com.ml.pojo.innerannouncement.Item;
 
 @Controller
 public class IremsController {
+	
+	
+
+	@Autowired
+	private ItemHandler handler;
 	
 		//商品查询列表
 		//@RequestMapping实现 对queryItems方法和url进行映射，一个方法对应一个url
@@ -21,15 +30,15 @@ public class IremsController {
 		public ModelAndView queryItems()throws Exception{
 			
 			//调用service查找 数据库，查询商品列表，这里使用静态数据模拟
-			List<Items> itemsList = new ArrayList<Items>();
+			List<Item> itemsList = new ArrayList<Item>();
 			//向list中填充静态数据
 			
-			Items items_1 = new Items();
+			Item items_1 = new Item();
 			items_1.setName("联想笔记本");
 			items_1.setPrice(6000f);
 			items_1.setDetail("ThinkPad T430 联想笔记本电脑！");
 			
-			Items items_2 = new Items();
+			Item items_2 = new Item();
 			items_2.setName("苹果手机");
 			items_2.setPrice(5000f);
 			items_2.setDetail("iphone6苹果手机！");
@@ -53,6 +62,21 @@ public class IremsController {
 		}
 		
 		
+		@ResponseBody
+		@RequestMapping(value = "/updateItems",method=RequestMethod.GET)
+		public Map updateItem()throws Exception{
+			Map map = new HashMap<>();
+			map.put("success", "success");
+			
+			Item items_1 = new Item();
+			items_1.setId(1);
+			items_1.setDetail("ThinkPad T430 联想笔记本电脑！");
+			
+			handler.updateItem(items_1);
+			
+			return map;
+			
+		}
 		
 		//商品查询列表
 		//@RequestMapping实现 对queryItems方法和url进行映射，一个方法对应一个url
@@ -64,15 +88,15 @@ public class IremsController {
 			QueryItermsResponse response = new QueryItermsResponse();
 			
 			//调用service查找 数据库，查询商品列表，这里使用静态数据模拟
-			List<Items> itemsList = new ArrayList<Items>();
+			List<Item> itemsList = new ArrayList<Item>();
 			//向list中填充静态数据
 			
-			Items items_1 = new Items();
+			Item items_1 = new Item();
 			items_1.setName("联想笔记本");
 			items_1.setPrice(6000f);
 			items_1.setDetail("ThinkPad T430 联想笔记本电脑！");
 			
-			Items items_2 = new Items();
+			Item items_2 = new Item();
 			items_2.setName("苹果手机");
 			items_2.setPrice(5000f);
 			items_2.setDetail("iphone6苹果手机！");

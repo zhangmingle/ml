@@ -1,6 +1,5 @@
 package com.ml.dao;
 
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -8,17 +7,21 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ml.dao.mapper.InnerAnnouncementMapper;
-import com.ml.test.InnerAnnouncement;
+import com.ml.dao.mapper.ItemMapper;
+import com.ml.pojo.innerannouncement.Item;
 
 public class InnerAnnouncementMapperTest extends AbstractPersistenceTest {
 
-	@Autowired
-	private InnerAnnouncementMapper mapper;
+/*	@Autowired
+	private InnerAnnouncementMapper mapper;*/
 	
-	//@Test
+/*	@Autowired
+	private ItemMapper itemMapper;*/
+	
+	/*@Test*/
 	public void test() throws Exception {
 		
-		InnerAnnouncement ia = new InnerAnnouncement();
+	/*	InnerAnnouncement ia = new InnerAnnouncement();
 		Date now = new Date();
 		
 		ia.setContent("你好");
@@ -35,7 +38,13 @@ public class InnerAnnouncementMapperTest extends AbstractPersistenceTest {
 		Class<?>[] classes = mapper.getClass().getInterfaces();
 		System.out.println(classes[0]);
 		
-		mapper.insertInnerAnnouncement(ia);
+		mapper.insertInnerAnnouncement(ia);*/
+		System.out.println(123);
+		Item item = new Item();
+		item.setId(1);
+		item.setDetail("asdasd");
+/*		itemMapper.updateItem(item);*/
+		
 	}
 
 

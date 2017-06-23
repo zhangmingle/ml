@@ -10,7 +10,7 @@ public class Orderdetail {
     private Integer itemsNum;
     
     //明细对应的商品信息
-    private Items items;
+    private Item items;
     
 
     public Integer getId() {
@@ -45,11 +45,11 @@ public class Orderdetail {
         this.itemsNum = itemsNum;
     }
 
-	public Items getItems() {
+	public Item getItems() {
 		return items;
 	}
 
-	public void setItems(Items items) {
+	public void setItems(Item items) {
 		this.items = items;
 	}
 

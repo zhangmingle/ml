@@ -17,7 +17,7 @@
       <mysql.version>5.1.29</mysql.version>
       <junit.version>4.10</junit.version>
       <c3p0.version>0.9.5.2</c3p0.version>
-      <org.aspectj.version>1.8.1</org.aspectj.version>
+      <org.aspectj.version>1.8.10</org.aspectj.version>
       <jstl.version>1.2</jstl.version>
       <javax.servlet.version>2.5</javax.servlet.version>
       <javax.servlet.jsp.version>2.1</javax.servlet.jsp.version>
@@ -87,9 +87,19 @@
 		</dependency>  
         <dependency>  
             <groupId>org.aspectj</groupId>  
+            <artifactId>aspectjrt</artifactId>  
+            <version>${org.aspectj.version}</version>  
+        </dependency>
+              <dependency>  
+            <groupId>org.aspectj</groupId>  
             <artifactId>aspectjweaver</artifactId>  
             <version>${org.aspectj.version}</version>  
-        </dependency>  
+        </dependency>
+        <dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>3.2.5</version>
+		</dependency>
         <dependency>  
             <groupId>jstl</groupId>  
             <artifactId>jstl</artifactId>  

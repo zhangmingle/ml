@@ -2,7 +2,9 @@ package com.ml.pojo.innerannouncement;
 
 import java.util.Date;
 
-public class Items {
+import com.ml.annotation.AuditField;
+
+public class Item {
     private Integer id;
 
     private String name;
@@ -13,6 +15,7 @@ public class Items {
 
     private Date createtime;
 
+    @AuditField
     private String detail;
 
     public Integer getId() {

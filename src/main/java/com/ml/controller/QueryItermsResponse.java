@@ -2,17 +2,17 @@ package com.ml.controller;
 
 import java.util.List;
 
-import com.ml.pojo.innerannouncement.Items;
+import com.ml.pojo.innerannouncement.Item;
 
 public class QueryItermsResponse {
 
-	List<Items> itemsList;
+	List<Item> itemsList;
 
-	public List<Items> getItemsList() {
+	public List<Item> getItemsList() {
 		return itemsList;
 	}
 
-	public void setItemsList(List<Items> itemsList) {
+	public void setItemsList(List<Item> itemsList) {
 		this.itemsList = itemsList;
 	}
 	

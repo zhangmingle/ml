@@ -19,9 +19,9 @@
 		</property>
 	</bean> 
 
-    <bean id="testBean" class="com.ml.pojo.innerannouncement.TestBean" init-method="myInit"
+<!--     <bean id="testBean" class="com.ml.pojo.innerannouncement.TestBean" init-method="myInit"
         destroy-method="myDestory" scope="singleton">
-    </bean>    
+    </bean>     -->
 
 	<bean 
 		id="dataSource" 
